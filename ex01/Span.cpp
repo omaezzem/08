@@ -1,24 +1,25 @@
 #include "Span.hpp"
 
 Span::Span() {
-    N == 0;
 }
 
 Span &Span::operator=(const Span &other)
 {
-    if (this != &other)
-        N == other.N;
+    static_cast<void>(other);
     return *this;
 }
+
 Span::Span(const Span &other){
-    N = other.N;
+    static_cast<void>(other);
 }
+
+Span::Span(unsigned int N) : N(N) {}
 
 Span::~Span() {}
 
 void Span::addNumber(unsigned int N)
 {
-    if (listnb.size() < N)
+    if (listnb.size() >= N)
         throw std::runtime_error("listnb is full");
     listnb.push_back(N);
 }
@@ -29,7 +30,7 @@ int Span::shortestSpan()
         throw std::runtime_error("no enough number");
  
     std::vector<int> sorted(listnb);
-    std::sort(listnb.begin(), sorted.end());
+    std::sort(sorted.begin(), sorted.end());
  
     int shortest = INT_MAX;
     for (std::size_t i = 1; i < sorted.size(); ++i)
