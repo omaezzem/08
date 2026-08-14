@@ -12,6 +12,7 @@
 class Span{
     private:
         unsigned int N;
+        std::vector<int> listnb;
     public:
         Span();
         Span &operator=(const Span &other);
@@ -21,7 +22,6 @@ class Span{
         void addNumber(unsigned int N);
         int shortestSpan();
         int longestSpan();  
-        std::vector<int> listnb;
 };
 
 
