@@ -8,12 +8,12 @@
 
 template <typename T>
 
-typename T::iterator easyfind(T &arr, int value) 
+void easyfind(T &arr, int value) 
 {
-    typename T::iterator it = std::find(arr.begin(), arr.end(), value);
+    typename T::const_iterator it = std::find(arr.begin(), arr.end(), value);
     if (it == arr.end())
         throw std::runtime_error("Value not found in the container");
-    return it;
+    std::cout << *it << std::endl;
 }
 
 #endif

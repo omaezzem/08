@@ -1,30 +1,36 @@
 #include "Span.hpp"
 
 Span::Span() {
+    N = 0;
 }
 
 Span &Span::operator=(const Span &other)
 {
-    static_cast<void>(other);
+    if (this != &other)
+    {
+        N = other.N;
+        listnb = other.listnb;
+    }
     return *this;
 }
 
 Span::Span(const Span &other){
-    static_cast<void>(other);
+    N = other.N;
+    listnb = other.listnb;
 }
 
-Span::Span(unsigned int N) : N(N) {}
+Span::Span(unsigned int n) : N(n) {}
 
 Span::~Span() {}
 
-void Span::addNumber(unsigned int N)
+void Span::addNumber(unsigned int number)
 {
-    if (listnb.size() >= N)
+    if (listnb.size() + 1 > N)
         throw std::runtime_error("listnb is full");
-    listnb.push_back(N);
+    listnb.push_back(number);
 }
 
-int Span::shortestSpan()
+long long Span::shortestSpan()
 {
     if (listnb.size() < 2)
         throw std::runtime_error("no enough number");
@@ -32,23 +38,23 @@ int Span::shortestSpan()
     std::vector<int> sorted(listnb);
     std::sort(sorted.begin(), sorted.end());
  
-    int shortest = INT_MAX;
+    long long shortest = 9223372036854775807;
     for (std::size_t i = 1; i < sorted.size(); ++i)
     {
-        int different = sorted[i] - sorted[i - 1];
+        long long different = sorted[i] - sorted[i - 1];
         if (different < shortest)
             shortest = different;
     }
     return shortest;
 }
 
-int Span::longestSpan()
+long long Span::longestSpan()
 {
     if (listnb.size() < 2)
         throw std::runtime_error("no enought number");
- 
-    int minVal = *std::min_element(listnb.begin(), listnb.end());
-    int maxVal = *std::max_element(listnb.begin(), listnb.end());
- 
+
+    long long minVal = *std::min_element(listnb.begin(), listnb.end());
+    long long maxVal = *std::max_element(listnb.begin(), listnb.end());
+
     return maxVal - minVal;
 }

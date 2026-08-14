@@ -4,10 +4,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <stdexcept>
-#include <climits>
-#include <iterator>
-
 
 class Span{
     private:
@@ -18,13 +14,18 @@ class Span{
         Span &operator=(const Span &other);
         Span(const Span &other);
         ~Span();
-        Span(unsigned int N);
-        void addNumber(unsigned int N);
-        int shortestSpan();
-        int longestSpan();  
+        Span(unsigned int n);
+        void addNumber(unsigned int number);
+        template <typename T>
+        void add_range_of_numbers(T begin, T end)
+        {
+            for (T it = begin; it != end; ++it)
+            {
+                addNumber(*it);
+            }
+        }
+        long long shortestSpan();
+        long long longestSpan();
 };
-
-
-
 
 #endif
